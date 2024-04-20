@@ -14,9 +14,13 @@ Com um design bem atual e organizado, passa ao usuário uma ótima experiência 
 # Link
 Acesse o Link do meu projeto, use a plataforma e tenha uma experiência única:
 
-Link do meu site 💻: https://sound-verse-plataform.vercel.app/
+Link do meu site 💻: https://projeto-quiz-react-chi.vercel.app/
 
 # Screenshot
 Aqui temos a captura de tela do projeto:
 
-![screenshot](./print.png)
+![screenshot](src/img/print.png)
+
+![screenshot](src/img/print1.png)
+
+![screenshot](src/img/print2.png)
