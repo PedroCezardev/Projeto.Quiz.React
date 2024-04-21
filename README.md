@@ -11,10 +11,10 @@ Com um design bem atual e organizado, passa ao usuário uma ótima experiência 
 
 <h2>Autor: Pedro Cezar Alves da Silva Beserra. <h2>
 
-<h3>Linguagens que foram utilizadas:<h3>
+<h2>Linguagens que foram utilizadas:<h2>
 - HTML
-* CSS
-+ Javascript
+- CSS
+- Javascript
 - Framework React.js
 
 # Link
