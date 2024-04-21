@@ -5,20 +5,21 @@
 
 // usando o Reducer conseguimos gerenciar estados mais complexos com mais facilidade
 import { createContext, useReducer } from 'react'
-import question from '../data/questions'
+import questions from '../data/questions_complete'
 
 // determinando os estagios do jogo
-const STAGES = ["Start", "Playing", "End"]
+const STAGES = ["Start", "Category", "Playing", "End"]
 
 // inicializando estados
 const initialState = {
     gameStage: STAGES[0],
-    question,
+    questions,
     currentQuestion: 0,
     answerSelected: false,
     score: 0,
-    
-}
+    help: false,
+    optionToHide: null,
+};
 
 // alterando o estado da aplicação
 const QuizReducer = (state, action) => {
@@ -30,35 +31,55 @@ const QuizReducer = (state, action) => {
                 gameStage: STAGES[1],
             };
 
+        case "START_GAME":
+            // estado inicial do jogo
+            let quizQuestions = null;
+
+            state.questions.forEach((question) => {
+                if (question.category === action.payload) {
+                    quizQuestions = question.questions;
+                }
+            });
+
+            return {
+                ...state,
+                questions: quizQuestions,
+                gameStage: STAGES[2],
+            };
+
         case "REORDER_QUESTIONS":
             // reordenar as peguntas
-            const reorderedQuestions = question.sort(() => {
+            const reorderedQuestions = state.questions.sort(() => {
                 return Math.random() - 0.5;
             });
 
             return {
                 ...state,
-                question: reorderedQuestions,
+                questions: reorderedQuestions,
             };
 
-        case "CHANGE_QUESTION":
+        case "CHANGE_QUESTION": {
             // seguir para proxima pergunta
             const nextQuestion = state.currentQuestion + 1;
 
             let endGame = false;
             // verificando se chegou no fim das peguntas
-            if (!question[nextQuestion]) {
+            if (!state.questions[nextQuestion]) {
                 endGame = true;
             }
 
             return {
                 ...state,
                 currentQuestion: nextQuestion,
-                gameStage: endGame ? STAGES[2] : state.gameStage,
+                gameStage: endGame ? STAGES[3] : state.gameStage,
                 answerSelected: false,
-            }
+                help: false,
+            };
+        }
 
         case "NEW_GAME":
+            console.log(questions);
+            console.log(initialState);
             return initialState;
         // reiniciando o jogo       
         // voltando para o estado inicial    
@@ -66,25 +87,55 @@ const QuizReducer = (state, action) => {
         case "CHECK_ANSWER": {
             // validando a resposta do usuário
             if (state.answerSelected) return state;
-      
+
             const answer = action.payload.answer;
             const option = action.payload.option;
             let correctAnswer = 0;
-      
+
             if (answer === option) correctAnswer = 1;
-      
+
             return {
-              ...state,
-              score: state.score + correctAnswer,
-              answerSelected: option,
+                ...state,
+                score: state.score + correctAnswer,
+                answerSelected: option,
             };
-          }
+        }
+        case "SHOW_TIP": {
+            // pegando o state da dica
+            return {
+                ...state,
+                help: "tip",
+            };
+        }
+
+        case "REMOVE_OPTION": {
+            const questionWithoutOption = state.questions[state.currentQuestion];
+
+            console.log(state.currentQuestion);
+
+            console.log(questionWithoutOption);
+
+            let repeat = true;
+            let optionToHide;
+
+            questionWithoutOption.options.forEach((option) => {
+                if (option !== questionWithoutOption.answer && repeat) {
+                    optionToHide = option;
+                    repeat = false;
+                }
+            });
+
+            return {
+                ...state,
+                optionToHide,
+                help: true,
+            };
+        }
 
         default:
             return state;
     }
-
-}
+};
 
 // criando e exportando o arquivo context
 export const QuizContext = createContext()
@@ -100,4 +151,3 @@ export const QuizProvider = ({ children }) => {
 
     return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>
 };
-

@@ -11,6 +11,12 @@ Com um design bem atual e organizado, passa ao usuário uma ótima experiência 
 
 <h2>Autor: Pedro Cezar Alves da Silva Beserra. <h2>
 
+<h2>Linguagens que foram utilizadas: <h2>
+- HTML
++ CSS
+* Javascript
+- Framework React.js
+
 # Link
 Acesse o Link do meu projeto, use a plataforma e tenha uma experiência única:
 
@@ -22,5 +28,7 @@ Aqui temos a captura de tela do projeto:
 ![screenshot](src/img/print.png)
 
 ![screenshot](src/img/print1.png)
+
+![screenshot](src/img/print2.png)
 
 ![screenshot](src/img/print2.png)
