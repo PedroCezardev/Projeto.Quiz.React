@@ -11,10 +11,10 @@ Com um design bem atual e organizado, passa ao usuário uma ótima experiência 
 
 <h2>Autor: Pedro Cezar Alves da Silva Beserra. <h2>
 
-<h2>Linguagens que foram utilizadas: <h2>
+<h3>Linguagens que foram utilizadas:<h3>
 - HTML
-+ CSS
-* Javascript
+* CSS
++ Javascript
 - Framework React.js
 
 # Link
@@ -27,8 +27,8 @@ Aqui temos a captura de tela do projeto:
 
 ![screenshot](src/img/print.png)
 
+![screenshot](src/img/print2.png)
+
 ![screenshot](src/img/print1.png)
 
-![screenshot](src/img/print2.png)
-
-![screenshot](src/img/print2.png)
+![screenshot](src/img/print3.png)
